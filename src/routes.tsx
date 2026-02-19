@@ -24,6 +24,7 @@ import { AuditPage } from '@/pages/dashboard/audit'
 
 import { PrivacyPolicyPage } from '@/pages/legal/privacy'
 import { TermsPage } from '@/pages/legal/terms'
+import { CookiePolicyPage } from '@/pages/legal/cookies'
 
 import { NotFoundPage } from '@/pages/not-found'
 import { ErrorPage } from '@/pages/error'
@@ -61,6 +62,7 @@ const router = createBrowserRouter([
   },
   { path: '/privacy', element: <PrivacyPolicyPage /> },
   { path: '/terms', element: <TermsPage /> },
+  { path: '/cookies', element: <CookiePolicyPage /> },
   { path: '/500', element: <ErrorPage /> },
   { path: '*', element: <NotFoundPage /> },
 ])

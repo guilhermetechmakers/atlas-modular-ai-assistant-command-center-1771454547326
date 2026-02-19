@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { toast } from 'sonner'
+import { useSignIn } from '@/hooks/useAuth'
 
 const schema = z.object({
   email: z.string().email('Invalid email'),
@@ -17,20 +17,19 @@ type FormData = z.infer<typeof schema>
 
 export function LoginPage() {
   const navigate = useNavigate()
+  const signIn = useSignIn()
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) })
 
-  const onSubmit = async (_data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     try {
-      // Placeholder: call auth API
-      await new Promise((r) => setTimeout(r, 600))
-      toast.success('Signed in successfully')
+      await signIn.mutateAsync({ email: data.email, password: data.password })
       navigate('/dashboard')
     } catch {
-      toast.error('Sign in failed. Check your credentials.')
+      // Error toast handled in useSignIn onError
     }
   }
 
@@ -63,8 +62,8 @@ export function LoginPage() {
             Forgot password?
           </Link>
           <div className="flex gap-2">
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? 'Signing in…' : 'Sign in'}
+            <Button type="submit" className="w-full" disabled={signIn.isPending}>
+              {signIn.isPending ? 'Signing in…' : 'Sign in'}
             </Button>
           </div>
           <div className="relative">

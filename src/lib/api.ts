@@ -1,9 +1,23 @@
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api'
 
-export interface ApiError {
+export interface ApiErrorShape {
   message: string
   code?: string
   status?: number
+}
+
+export type ApiError = Error & ApiErrorShape
+
+export function createApiError(
+  message: string,
+  status?: number,
+  code?: string
+): ApiError {
+  const err = new Error(message) as ApiError
+  err.name = 'ApiError'
+  err.status = status
+  err.code = code
+  return err
 }
 
 async function request<T>(
@@ -25,18 +39,16 @@ async function request<T>(
       localStorage.removeItem('atlas_token')
       window.location.href = '/auth/login'
     }
-    const err: ApiError = {
-      message: res.statusText,
-      status: res.status,
-    }
+    let message = res.statusText
+    let code: string | undefined
     try {
       const body = await res.json()
-      if (body.message) err.message = body.message
-      if (body.code) err.code = body.code
+      if (body.message) message = body.message
+      if (body.code) code = body.code
     } catch {
       // ignore
     }
-    throw err
+    throw createApiError(message, res.status, code)
   }
   const contentType = res.headers.get('content-type')
   if (contentType?.includes('application/json')) {

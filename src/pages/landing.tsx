@@ -66,6 +66,68 @@ export function LandingPage() {
         </div>
       </section>
 
+      {/* Pricing */}
+      <section id="pricing" className="px-4 py-24 md:px-8 lg:px-12 border-t border-border scroll-mt-20">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="text-2xl font-bold text-white text-center mb-12">Simple pricing</h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-card transition-all duration-200 hover:shadow-card-hover hover:border-primary/30">
+              <h3 className="text-lg font-semibold text-white">Cloud</h3>
+              <p className="mt-2 text-sm text-muted-foreground">Managed hosting, always up to date.</p>
+              <p className="mt-4 text-2xl font-bold text-primary">Free tier</p>
+              <p className="text-sm text-muted-foreground">Get started with core features.</p>
+              <Button className="mt-6 w-full" asChild>
+                <Link to="/auth/signup">Get Started</Link>
+              </Button>
+            </div>
+            <div className="rounded-2xl border-2 border-primary/50 bg-card p-6 shadow-card transition-all duration-200 hover:shadow-card-hover">
+              <span className="text-xs font-medium text-primary uppercase tracking-wide">Self-host</span>
+              <h3 className="text-lg font-semibold text-white mt-1">Your infrastructure</h3>
+              <p className="mt-2 text-sm text-muted-foreground">Full control, your data, your rules.</p>
+              <p className="mt-4 text-2xl font-bold text-white">Open source</p>
+              <p className="text-sm text-muted-foreground">Docker, backups, no vendor lock-in.</p>
+              <Button variant="secondary" className="mt-6 w-full" asChild>
+                <a href="#self-host" className="inline-flex items-center justify-center gap-2">
+                  Self-host Guide <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="px-4 py-24 md:px-8 lg:px-12 border-t border-border bg-card/30">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="text-2xl font-bold text-white text-center mb-12">Built for makers</h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            <blockquote className="rounded-xl border border-border bg-background p-6">
+              <p className="text-foreground text-sm leading-relaxed">
+                &quot;Finally one place for repos, content, and calendar. The PM agent creating issues from my specs is a game-changer.&quot;
+              </p>
+              <footer className="mt-4 text-sm text-muted-foreground">— Solo founder, dev tools</footer>
+            </blockquote>
+            <blockquote className="rounded-xl border border-border bg-background p-6">
+              <p className="text-foreground text-sm leading-relaxed">
+                &quot;Self-hosted and audit logs on every action. Exactly what we needed for client work and compliance.&quot;
+              </p>
+              <footer className="mt-4 text-sm text-muted-foreground">— Small agency, 5 people</footer>
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      {/* Self-host */}
+      <section id="self-host" className="px-4 py-16 md:px-8 lg:px-12 border-t border-border scroll-mt-20">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-xl font-bold text-white">Self-host Atlas</h2>
+          <p className="mt-2 text-sm text-muted-foreground">Run Atlas on your own infrastructure with Docker. Full docs and backup guides in Help.</p>
+          <Button variant="outline" size="sm" className="mt-4" asChild>
+            <Link to="/dashboard/help">Docs &amp; setup</Link>
+          </Button>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="px-4 py-24 md:px-8 lg:px-12 border-t border-border">
         <div className="mx-auto max-w-3xl text-center">
@@ -86,6 +148,7 @@ export function LandingPage() {
           <div className="flex gap-6">
             <Link to="/privacy" className="text-sm text-muted-foreground hover:text-foreground">Privacy</Link>
             <Link to="/terms" className="text-sm text-muted-foreground hover:text-foreground">Terms</Link>
+            <Link to="/cookies" className="text-sm text-muted-foreground hover:text-foreground">Cookies</Link>
             <Link to="/dashboard/help" className="text-sm text-muted-foreground hover:text-foreground">Help</Link>
           </div>
         </div>
